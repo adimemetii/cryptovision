@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Profile — CryptoVision{% endblock %}
+{% block page_title %}Profile{% endblock %}
+{% block content %}
+<section class="page-heading-row"><div><div class="eyebrow gold">ACCOUNT SETTINGS</div><h1>Your profile</h1><p>Manage the identity attached to your workspace.</p></div></section><div class="profile-layout"><section class="card profile-edit"><div class="profile-avatar">{{ current_user.first_name[0]|upper }}</div><h2>{{ current_user.first_name }} {{ current_user.last_name }}</h2><p class="muted">@{{ current_user.username }} · {{ current_user.email }}</p><form method="post" class="stack-form"><label>First name<input name="first_name" value="{{ current_user.first_name }}" required></label><label>Last name<input name="last_name" value="{{ current_user.last_name }}" required></label><button class="button" type="submit">Save changes</button></form></section><section class="card account-facts"><div class="eyebrow">ACCOUNT OVERVIEW</div><div class="fact"><small>MEMBER SINCE</small><strong>{{ current_user.created_at.strftime('%B %d, %Y') }}</strong></div><div class="fact"><small>DATASETS</small><strong>{{ current_user.datasets|length }}</strong></div><div class="fact"><small>PREDICTION RUNS</small><strong>{{ current_user.predictions|length }}</strong></div></section></div>
+{% endblock %}
+

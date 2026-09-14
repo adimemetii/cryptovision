@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}CryptoVision — Transform Data Into Crypto Intelligence{% endblock %}
+{% block body_class %}landing-body{% endblock %}
+{% block content %}
+<div class="landing-nav"><a class="brand" href="{{ url_for('main.index') }}"><span class="brand-mark">CV</span><span>Crypto<span class="gold">Vision</span></span></a><div><a class="text-link" href="{{ url_for('auth.login') }}">Log in</a><a class="button small" href="{{ url_for('auth.signup') }}">Get started</a></div></div>
+<section class="hero"><div class="hero-copy"><div class="eyebrow gold">DATA · ANALYTICS · INTELLIGENCE</div><h1>Transform data into <span class="gold">crypto intelligence.</span></h1><p>Upload any dataset, clean it automatically, explore the patterns, and forecast what comes next — in one focused workspace.</p><div class="hero-actions"><a class="button" href="{{ url_for('auth.signup') }}">Start analyzing <span>→</span></a><a class="text-link" href="{{ url_for('auth.login') }}">I already have an account</a></div></div><div class="hero-orb"><div class="orb-ring ring-one"></div><div class="orb-ring ring-two"></div><div class="orb-core"><span>CV</span><small>INSIGHT ENGINE</small></div><div class="floating-stat stat-one"><small>MARKET SIGNAL</small><strong>+24.8%</strong></div><div class="floating-stat stat-two"><small>DATA QUALITY</small><strong>98.4%</strong></div></div></section>
+<section class="feature-strip"><div><span class="feature-icon">↥</span><strong>Any dataset</strong><small>CSV · XLSX · JSON</small></div><div><span class="feature-icon">⌁</span><strong>Smart forecasts</strong><small>Linear + XGBoost</small></div><div><span class="feature-icon">◈</span><strong>Rich visuals</strong><small>14 chart types</small></div></section>
+<footer class="landing-footer">CryptoVision <span>·</span> Transform Data Into Crypto Intelligence.</footer>
+{% endblock %}
+

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}CryptoVision{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/features.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+{% if current_user.is_authenticated %}
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="{{ url_for('main.dashboard') }}"><img class="brand-logo" src="{{ url_for('static', filename='logo.png') }}" alt="CryptoVision logo"><span>Crypto<span class="gold">Vision</span></span></a>
+    <div class="sidebar-label">Workspace</div>
+    <nav>
+      <a href="{{ url_for('main.dashboard') }}" class="{% if request.endpoint == 'main.dashboard' %}active{% endif %}"><span>◈</span> Dashboard</a>
+      <a href="{{ url_for('main.upload') }}" class="{% if request.endpoint == 'main.upload' %}active{% endif %}"><span>↥</span> Upload Data</a>
+      <a href="{{ url_for('main.visualization_hub') }}" class="{% if request.endpoint in ['main.visualization_hub', 'main.visualizations'] %}active{% endif %}"><span>◈</span> Visualizations</a>
+      <a href="{{ url_for('main.datasets') }}" class="{% if request.endpoint in ['main.datasets', 'main.dataset_detail'] %}active{% endif %}"><span>▦</span> Datasets</a>
+      <a href="{{ url_for('main.templates') }}" class="{% if request.endpoint == 'main.templates' %}active{% endif %}"><span>◇</span> Templates</a>
+      <a href="{{ url_for('main.prediction') }}" class="{% if request.endpoint == 'main.prediction' %}active{% endif %}"><span>⌁</span> Prediction Studio</a>
+      <a href="{{ url_for('main.history') }}" class="{% if request.endpoint == 'main.history' %}active{% endif %}"><span>◷</span> History</a>
+      <a href="{{ url_for('main.powerbi') }}" class="{% if request.endpoint == 'main.powerbi' %}active{% endif %}"><span>▦</span> Power BI</a>
+    </nav>
+    <div class="sidebar-footer"><a href="{{ url_for('main.profile') }}">◉ &nbsp; Profile</a><a href="{{ url_for('auth.logout') }}">↪ &nbsp; Logout</a></div>
+  </aside>
+  <div class="mobile-bar"><button class="icon-button" id="menu-toggle">☰</button><span class="brand-text">Crypto<span class="gold">Vision</span></span></div>
+  <main class="main-content">
+    <header class="topbar"><div><div class="eyebrow">CRYPTO INTELLIGENCE PLATFORM</div><div class="top-title">{% block page_title %}Command Center{% endblock %}</div></div><div class="user-chip"><span class="avatar">{{ current_user.first_name[0]|upper }}</span><span>{{ current_user.first_name }}</span></div></header>
+{% else %}
+  <main>
+{% endif %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}<div class="flash-stack">{% for category, message in messages %}<div class="flash {{ category }}">{{ message }}<button onclick="this.parentElement.remove()">×</button></div>{% endfor %}</div>{% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+{% if current_user.is_authenticated %}</main>{% else %}</main>{% endif %}
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

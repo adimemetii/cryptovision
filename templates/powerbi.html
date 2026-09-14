@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Power BI — CryptoVision{% endblock %}
+{% block page_title %}Power BI{% endblock %}
+{% block content %}
+<section class="page-heading-row">
+  <div>
+    <div class="eyebrow gold">EXPORT, MODEL, REPORT</div>
+    <h1>Power BI workspace</h1>
+    <p>Download a cleaned Excel version for analysis or the original raw file for full traceability.</p>
+  </div>
+  <a class="button" href="https://www.microsoft.com/en-us/download/details.aspx?id=58494" target="_blank" rel="noopener">Download Power BI Desktop ↗</a>
+</section>
+
+<section class="info-grid powerbi-guide-grid">
+  <article class="card info-card powerbi-step">
+    <span class="powerbi-step-number">01</span>
+    <h3>Download the data</h3>
+    <p>Use <strong>Cleaned Excel</strong> for standardized columns, converted dates, removed duplicates, and handled missing values. Use <strong>Raw</strong> when you need the exact uploaded source.</p>
+  </article>
+  <article class="card info-card powerbi-step">
+    <span class="powerbi-step-number">02</span>
+    <h3>Load it in Power BI</h3>
+    <p>In Power BI Desktop choose <strong>Get data → Excel</strong>, select the cleaned workbook, choose the sheet, and select <strong>Load</strong>. For a CSV or JSON raw file, choose its matching connector.</p>
+  </article>
+  <article class="card info-card powerbi-step">
+    <span class="powerbi-step-number">03</span>
+    <h3>Build your report</h3>
+    <p>Drag fields into the report canvas, add slicers for dates or assets, and choose charts such as line, column, cards, maps, or tables. Save the finished report as a <strong>.pbix</strong> file.</p>
+  </article>
+</section>
+
+<section class="card powerbi-callout">
+  <div class="powerbi-callout-icon">▦</div>
+  <div>
+    <h2>Why use the cleaned Excel export?</h2>
+    <p>The cleaned export is always delivered as <strong>.xlsx</strong>, even when the original upload was CSV, XLS, or JSON. This gives Power BI one predictable input format while preserving the raw download separately.</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">YOUR DATA LIBRARY</div>
+      <h2>Power BI downloads</h2>
+    </div>
+    <span class="tag">Cleaned + Raw</span>
+  </div>
+  {% if datasets %}
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>DATASET</th><th>UPLOADED AS</th><th>ROWS</th><th>DOWNLOADS</th></tr></thead>
+        <tbody>
+          {% for dataset in datasets %}
+            <tr>
+              <td><a class="table-link" href="{{ url_for('main.dataset_detail', dataset_id=dataset.id) }}"><span class="file-icon">▤</span>{{ dataset.name }}</a></td>
+              <td><span class="tag">{{ dataset.file_type }}</span></td>
+              <td>{{ '{:,}'.format(dataset.row_count) }}</td>
+              <td><div class="download-links inline-downloads"><a href="{{ url_for('main.download_dataset', dataset_id=dataset.id, kind='cleaned') }}">Cleaned Excel ↓</a><a href="{{ url_for('main.download_dataset', dataset_id=dataset.id, kind='original') }}">Raw {{ dataset.file_type }} ↓</a></div></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <span>▤</span>
+      <p>Upload a dataset before exporting it to Power BI.</p>
+      <a class="button" href="{{ url_for('main.upload') }}">Upload data</a>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

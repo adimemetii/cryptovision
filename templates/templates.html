@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Templates — CryptoVision{% endblock %}
+{% block page_title %}Data Templates{% endblock %}
+{% block content %}
+<section class="page-heading-row"><div><div class="eyebrow gold">START WITH A SIGNAL</div><h1>Demo datasets</h1><p>Download example crypto and NFT data to explore the platform.</p></div></section><div class="template-grid"><section class="card template-card"><div class="template-art crypto-art"><span>₿</span><span>Ξ</span><span>◈</span></div><div class="eyebrow gold">CRYPTO PRICES</div><h2>Market movement</h2><p>OHLCV data for BTC and ETH, ready for candlesticks, KPIs, and forecasts.</p><div class="download-links"><a href="{{ url_for('main.download_template', name='crypto_prices', extension='csv') }}">CSV ↓</a><a href="{{ url_for('main.download_template', name='crypto_prices', extension='xlsx') }}">XLSX ↓</a><a href="{{ url_for('main.download_template', name='crypto_prices', extension='json') }}">JSON ↓</a></div></section><section class="card template-card"><div class="template-art nft-art"><span>◇</span><span>✦</span><span>○</span></div><div class="eyebrow gold">NFT COLLECTIONS</div><h2>Collection activity</h2><p>Floor price, sales, volume, and owners across demo collections.</p><div class="download-links"><a href="{{ url_for('main.download_template', name='nft_collections', extension='csv') }}">CSV ↓</a><a href="{{ url_for('main.download_template', name='nft_collections', extension='xlsx') }}">XLSX ↓</a></div></section></div>
+{% endblock %}
+

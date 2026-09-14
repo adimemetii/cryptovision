@@ -1,0 +1,20 @@
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+*.db
+instance/*
+uploads/*
+!uploads/.gitkeep
+*.pem
+*.key
+*.crt
+# Local database exports (schema.sql is intentionally tracked).
+cryptovision.sql
+cryptovision-*.sql
+*.dump.sql
+*.backup.sql
+*.sql.gz
+.pytest_cache/
+.venv/

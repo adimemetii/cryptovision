@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Upload Data — CryptoVision{% endblock %}
+{% block page_title %}Upload Data{% endblock %}
+{% block content %}
+<div class="page-intro"><div class="eyebrow gold">DATA INGESTION</div><h1>Bring your data into focus.</h1><p>Upload any valid CSV, Excel, or JSON dataset. CryptoVision cleans and profiles it automatically — no fixed columns required.</p></div>
+<form method="post" enctype="multipart/form-data" class="upload-card" id="upload-form"><div class="drop-zone" id="drop-zone"><input type="file" name="file" id="file-input" accept=".csv,.xlsx,.xls,.json" required><div class="upload-symbol">↥</div><h2>Drop your dataset here</h2><p>or <span class="gold">browse files</span></p><small>CSV · XLSX · XLS · JSON &nbsp; / &nbsp; MAX 32 MB</small><div class="selected-file" id="selected-file"></div></div><button class="button upload-submit" type="submit">Upload & analyze <span>→</span></button></form>
+<div class="info-grid"><div class="card info-card"><span class="feature-icon gold">✦</span><h3>Automatic profiling</h3><p>Rows, types, missing values, duplicates, and crypto signals are detected instantly.</p></div><div class="card info-card"><span class="feature-icon blue">◌</span><h3>Safe cleaning</h3><p>Your original file stays untouched while a cleaned version fills sensible gaps.</p></div><div class="card info-card"><span class="feature-icon green">⌁</span><h3>Ready to explore</h3><p>Use the cleaned data to build charts and statistical forecasts immediately.</p></div></div>
+{% endblock %}
+

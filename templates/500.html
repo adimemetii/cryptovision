@@ -1,0 +1,4 @@
+{% extends "base.html" %}
+{% block title %}Something went wrong — CryptoVision{% endblock %}
+{% block content %}<div class="error-page"><div class="eyebrow gold">500 · SERVER ERROR</div><h1>We hit a noisy signal.</h1><p>Something went wrong while processing that request. Please try again.</p><a class="button" href="{{ url_for('main.index') }}">Return home →</a></div>{% endblock %}
+

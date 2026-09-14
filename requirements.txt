@@ -1,0 +1,13 @@
+Flask
+Flask-SQLAlchemy
+Flask-Login
+PyMySQL
+python-dotenv
+pandas
+numpy
+scikit-learn
+xgboost
+openpyxl
+plotly
+Werkzeug
+gunicorn

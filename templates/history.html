@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}History — CryptoVision{% endblock %}
+{% block page_title %}Prediction History{% endblock %}
+{% block content %}
+<section class="page-heading-row"><div><div class="eyebrow gold">YOUR MODEL RUNS</div><h1>History</h1><p>Review every forecast generated in your workspace.</p></div><a class="button" href="{{ url_for('main.prediction') }}">＋ New prediction</a></section><section class="card">{% if predictions %}<div class="table-wrap"><table><thead><tr><th>MODEL</th><th>DATASET</th><th>TARGET</th><th>METRICS</th><th>CREATED</th><th></th></tr></thead><tbody>{% for prediction in predictions %}<tr><td><span class="status-dot"></span>{{ prediction.model_type }}</td><td>{{ prediction.dataset.name }}</td><td>{{ prediction.target_column }}</td><td>{% for key, value in prediction.metrics.items() if key != 'Confusion Matrix' %}<span class="metric-inline">{{ key }} {{ value }}</span>{% endfor %}</td><td>{{ prediction.created_at.strftime('%b %d, %Y') }}</td><td><a class="arrow-link" href="{{ url_for('main.download_prediction', prediction_id=prediction.id) }}">↓ XLSX</a></td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty-state large"><span>◷</span><h2>No model runs yet</h2><p>Your prediction results will be saved here.</p><a class="button" href="{{ url_for('main.prediction') }}">Open Prediction Studio</a></div>{% endif %}</section>
+{% endblock %}
+

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Visualizations — CryptoVision{% endblock %}
+{% block page_title %}Visualizations{% endblock %}
+{% block content %}
+<section class="page-heading-row">
+  <div>
+    <div class="eyebrow gold">12 WAYS TO READ YOUR DATA</div>
+    <h1>Visualization Studio</h1>
+    <p>Choose a dataset and explore twelve interactive chart types built for crypto and general analytics.</p>
+  </div>
+  <a class="button" href="{{ url_for('main.upload') }}">＋ Upload dataset</a>
+</section>
+
+<section class="visual-gallery">
+  {% for key, label in chart_types.items() %}
+    {% set detail = chart_details.get(key) %}
+    <article class="card visual-type-card">
+      <div class="visual-type-icon">{{ detail[0] }}</div>
+      <div>
+        <div class="eyebrow gold">{{ '%02d'|format(loop.index) }}</div>
+        <h2>{{ label }}</h2>
+        <p>{{ detail[1] }}</p>
+      </div>
+    </article>
+  {% endfor %}
+</section>
+
+<section class="card dataset-launcher">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">SELECT A DATASET</div>
+      <h2>Open the interactive builder</h2>
+    </div>
+    <span class="tag">12 chart types</span>
+  </div>
+  {% if datasets %}
+    <div class="launcher-list">
+      {% for dataset in datasets %}
+        <div class="launcher-row">
+          <span class="file-icon">▤</span>
+          <span class="launcher-copy"><strong>{{ dataset.name }}</strong><small>{{ dataset.file_type }} · {{ '{:,}'.format(dataset.row_count) }} rows · {{ dataset.column_count }} columns</small></span>
+          <a class="button small" href="{{ url_for('main.visualizations', dataset_id=dataset.id) }}">Open studio →</a>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state">
+      <span>◈</span>
+      <p>Upload a dataset to start creating visualizations.</p>
+      <a class="button" href="{{ url_for('main.upload') }}">Upload data</a>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

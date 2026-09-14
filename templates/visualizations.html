@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Visualizations — CryptoVision{% endblock %}
+{% block page_title %}Visualization Studio{% endblock %}
+{% block content %}
+<section class="visual-gallery compact-visual-gallery">
+  {% for key, label in chart_types.items() %}
+    {% set detail = chart_details.get(key) %}
+    <button type="button" class="card visual-type-card visual-type-button" data-chart-type="{{ key }}">
+      <span class="visual-type-icon">{{ detail[0] }}</span><span><strong>{{ label }}</strong><small>{{ detail[1] }}</small></span>
+    </button>
+  {% endfor %}
+</section>
+<section class="page-heading-row"><div><div class="eyebrow gold">EXPLORE THE SIGNAL</div><h1>{{ dataset.name }}</h1><p>Build an interactive chart from any column in your dataset.</p></div><a class="button outline" href="{{ url_for('main.dataset_detail', dataset_id=dataset.id) }}">← Dataset profile</a></section>
+<section class="card builder-card"><form method="post" class="builder-form"><label>Chart type<select name="chart_type">{% for key, label in chart_types.items() %}<option value="{{ key }}" {% if settings.chart_type == key %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label><label>X axis<select name="x"><option value="">Auto</option>{% for column in columns %}<option value="{{ column }}" {% if settings.x == column %}selected{% endif %}>{{ column }}</option>{% endfor %}</select></label><label>Y axis<select name="y"><option value="">Auto</option>{% for column in columns %}<option value="{{ column }}" {% if settings.y == column %}selected{% endif %}>{{ column }}</option>{% endfor %}</select></label><label>Group / color<select name="color"><option value="">None</option>{% for column in columns %}<option value="{{ column }}" {% if settings.color == column %}selected{% endif %}>{{ column }}</option>{% endfor %}</select></label><label>Aggregation<select name="aggregation"><option value="none" {% if settings.aggregation == 'none' %}selected{% endif %}>None</option><option value="mean" {% if settings.aggregation == 'mean' %}selected{% endif %}>Mean</option><option value="sum" {% if settings.aggregation == 'sum' %}selected{% endif %}>Sum</option><option value="median" {% if settings.aggregation == 'median' %}selected{% endif %}>Median</option><option value="count" {% if settings.aggregation == 'count' %}selected{% endif %}>Count</option></select></label><button class="button" type="submit">Generate chart <span>→</span></button></form></section>
+{% if chart_error %}<div class="notice error">{{ chart_error }}</div>{% endif %}<section class="card chart-card">{% if chart_json %}<div id="chart" class="chart-container"></div>{% else %}<div class="chart-placeholder"><span>◈</span><h2>Your chart will appear here</h2><p>Select your dimensions above and generate an interactive visualization.</p></div>{% endif %}</section>
+{% endblock %}
+{% block scripts %}<script>
+document.querySelectorAll('.visual-type-button').forEach(function (button) {
+  button.addEventListener('click', function () {
+    const selector = document.querySelector('select[name="chart_type"]');
+    selector.value = button.dataset.chartType;
+    document.querySelector('.builder-card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    selector.focus();
+  });
+});
+</script>{% if chart_json %}<script>const chartData = {{ chart_json|safe }}; Plotly.newPlot('chart', chartData.data, chartData.layout, {responsive:true, displaylogo:false});</script>{% endif %}{% endblock %}
