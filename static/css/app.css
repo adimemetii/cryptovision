@@ -4,6 +4,7 @@
  .kpi-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:-10px 0 28px}.kpi-item{background:rgba(217,173,86,.07);border:1px solid rgba(217,173,86,.2);border-radius:10px;padding:13px 15px}.kpi-item small{display:block;color:var(--muted);font-size:9px;letter-spacing:1px;font-weight:700}.kpi-item strong{display:block;color:var(--gold-2);font:600 18px 'Space Grotesk';margin-top:5px}
 
 /* Use the supplied logo consistently across the app and responsive navigation. */
+.button-group{display:flex;gap:12px;flex-wrap:wrap}
 .brand-logo{height:35px;width:35px;object-fit:contain;display:block;flex:0 0 auto}
 .brand-mark{height:35px;width:35px;border-radius:0;background:url('../logo.png') center/contain no-repeat;color:transparent;font-size:0}
 .mobile-bar .brand-text{display:flex;align-items:center;gap:8px}
